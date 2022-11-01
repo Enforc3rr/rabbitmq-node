@@ -37,11 +37,15 @@ async function connectRabbitMq() {
   content: <Buffer 7b 22 6e 75 6d 62 65 72 22 3a 35 32 35 32 7d>
 }
          */
+        // channel.consume("queue",msg =>{
+        //     console.log(msg.content.toString());
+        //     channel.ack(msg);
+        // },{noAck : true}); it automatically acknowledges the message. [useful in case of messages and not tasks]
+
         channel.consume("queue",msg =>{
             console.log(msg.content.toString());
             channel.ack(msg);
         });
-
     }catch (e) {
         console.error(e);
     }
